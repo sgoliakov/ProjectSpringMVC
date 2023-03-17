@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All people</title>
 </head>
 <body>
 <div th:each="pers : ${people}">
-    <a th:href="@{/people/{id}(id=${pers.getId()})}"
+    <a th:href="@{/people/{id}(id = ${pers.getId()})}"
        th:text="${pers.getName() + ', ' + pers.getAge()}">user</a>
 </div>
-<br/>
 <hr/>
-<a href="/people/new">create new person</a>
+<a th:href="@{/people/new_person}">Create person</a>
 </body>
 </html>
