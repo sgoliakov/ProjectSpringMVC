@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PeopleJdbcTemplateDAO {
@@ -25,10 +26,16 @@ public class PeopleJdbcTemplateDAO {
         return jdbcTemplate.query("select * from person", new PersonMapper());
     }
 
-    public Person getPersonById(int id) {
+    public Person getPerson(int id) {
         List<Person> list = jdbcTemplate.query("select * from person where id=?",
                 new BeanPropertyRowMapper<>(Person.class), id);
         return list.stream().findAny().orElse(null);
+    }
+
+    public Optional<Person> getPerson(String mail) {
+        List<Person> list = jdbcTemplate.query("select * from person where mail=?",
+                new BeanPropertyRowMapper<>(Person.class), mail);
+        return list.stream().findAny();
     }
 
     public void save(Person p) {
