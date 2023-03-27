@@ -1,9 +1,6 @@
 package logic.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Getter
@@ -22,4 +19,8 @@ public class Person {
     @NotEmpty(message = "mail should not be empty")
     @Email(message = "email should be valid")
     private String mail;
+    // Country, City, index
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}",
+            message = "Your address should be in this format: Country, City, index(6 digits)")
+    private String address;
 }

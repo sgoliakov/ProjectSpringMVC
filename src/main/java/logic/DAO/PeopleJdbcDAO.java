@@ -40,7 +40,8 @@ public class PeopleJdbcDAO {
                 String name = resultSet.getString("name");
                 int age = resultSet.getInt("age");
                 String mail = resultSet.getString("mail");
-                people.add(new Person(id, name, age, mail));
+                String address = resultSet.getString("address");
+                people.add(new Person(id, name, age, mail, address));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -71,12 +72,13 @@ public class PeopleJdbcDAO {
     }
 
     public void save(Person person) {
-        String sql = "insert into person (name, age, mail) VALUES (?,?,?)";
+        String sql = "insert into person (name, age, mail, address) VALUES (?,?,?,?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, person.getName());
             statement.setInt(2, person.getAge());
             statement.setString(3, person.getMail());
+            statement.setString(4, person.getAddress());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -85,13 +87,14 @@ public class PeopleJdbcDAO {
     }
 
     public void update(Person person, int id) {
-        String sql = "update person set name = ?, age = ?, mail = ? where id = ?";
+        String sql = "update person set name = ?, age = ?, mail = ?, address = ? where id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, person.getName());
             statement.setInt(2, person.getAge());
             statement.setString(3, person.getMail());
-            statement.setInt(4, id);
+            statement.setString(4, person.getAddress());
+            statement.setInt(5, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

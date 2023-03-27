@@ -39,13 +39,13 @@ public class PeopleJdbcTemplateDAO {
     }
 
     public void save(Person p) {
-        String sql = "insert into person (name, age, mail) VALUES (?,?,?)";
-        jdbcTemplate.update(sql, p.getName(), p.getAge(), p.getMail());
+        String sql = "insert into person (name, age, mail, address) VALUES (?,?,?,?)";
+        jdbcTemplate.update(sql, p.getName(), p.getAge(), p.getMail(), p.getAddress());
     }
 
     public void update(Person p, int id) {
-        String sql = "update person set name = ?, age = ?, mail = ? where id = ?";
-        jdbcTemplate.update(sql, p.getName(), p.getAge(), p.getMail(), id);
+        String sql = "update person set name = ?, age = ?, mail = ?, address = ? where id = ?";
+        jdbcTemplate.update(sql, p.getName(), p.getAge(), p.getMail(), p.getAddress(), id);
     }
 
     public void delete(int id) {
@@ -67,13 +67,14 @@ public class PeopleJdbcTemplateDAO {
     public void withBatchUpdate() {
         List<Person> people = create1000People();
         long before = System.currentTimeMillis();
-        jdbcTemplate.batchUpdate("insert into person (name, age, mail) VALUES (?,?,?)",
+        jdbcTemplate.batchUpdate("insert into person (name, age, mail, address) VALUES (?,?,?,?)",
                 new BatchPreparedStatementSetter() {
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
                         ps.setString(1, people.get(i).getName());
                         ps.setInt(2, people.get(i).getAge());
                         ps.setString(3, people.get(i).getMail());
+                        ps.setString(4, people.get(i).getAddress());
                     }
 
                     @Override
@@ -93,6 +94,7 @@ public class PeopleJdbcTemplateDAO {
             person.setName("Name" + i);
             person.setAge(30);
             person.setMail("some.mail" + i + "@mail.com");
+            person.setAddress("Country, City, 123456");
             list.add(person);
         }
         return list;
