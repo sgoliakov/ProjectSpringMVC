@@ -25,18 +25,18 @@ public class PeopleController {
     @GetMapping()
     public String showPeople(Model model) {
         model.addAttribute("people", peopleJdbcTemplateDAO.getPeople());
-        return "/peopleControllerView/show_people";
+        return "/people/show_people";
     }
 
     @GetMapping("/{id}")
     public String showPerson(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", peopleJdbcTemplateDAO.getPerson(id));
-        return "/peopleControllerView/show_person";
+        return "/people/show_person";
     }
 
     @GetMapping("/new_person")
     public String newPerson(@ModelAttribute("person") Person person) {
-        return "/peopleControllerView/new_person";
+        return "/people/new_person";
     }
 
     @PostMapping()
@@ -44,7 +44,7 @@ public class PeopleController {
                                BindingResult bindingResult) {
         personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
-            return "/peopleControllerView/new_person";
+            return "/people/new_person";
         }
         peopleJdbcTemplateDAO.save(person);
         return "redirect:/people";
@@ -53,7 +53,7 @@ public class PeopleController {
     @GetMapping("/{id}/edit")
     public String showEditor(Model model, @PathVariable("id") int id) {
         model.addAttribute("person", peopleJdbcTemplateDAO.getPerson(id));
-        return "/peopleControllerView/edit_person";
+        return "/people/edit_person";
     }
 
     @PatchMapping("/{id}")
@@ -61,7 +61,7 @@ public class PeopleController {
                                BindingResult bindingResult,
                                @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
-            return "//peopleControllerView/edit_person";
+            return "/people/edit_person";
         peopleJdbcTemplateDAO.update(person, id);
         return "redirect:/people";
     }
