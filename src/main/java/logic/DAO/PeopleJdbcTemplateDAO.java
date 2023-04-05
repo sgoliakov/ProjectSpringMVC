@@ -1,6 +1,7 @@
 package logic.DAO;
 
 import logic.models.Person;
+import logic.utill.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

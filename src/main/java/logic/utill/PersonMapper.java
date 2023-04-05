@@ -1,4 +1,4 @@
-package logic.DAO;
+package logic.utill;
 
 import logic.models.Person;
 import org.springframework.jdbc.core.RowMapper;

@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/people")
-public class PeopleController {
+public class PeopleControllerJdbcTemplate {
     private final PeopleJdbcTemplateDAO peopleJdbcTemplateDAO;
     private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PeopleJdbcTemplateDAO peopleJdbcTemplateDAO, PersonValidator personValidator) {
+    public PeopleControllerJdbcTemplate(PeopleJdbcTemplateDAO peopleJdbcTemplateDAO, PersonValidator personValidator) {
         this.peopleJdbcTemplateDAO = peopleJdbcTemplateDAO;
         this.personValidator = personValidator;
     }
