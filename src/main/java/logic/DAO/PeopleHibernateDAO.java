@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -34,6 +35,7 @@ public class PeopleHibernateDAO {
     @Transactional
     public void save(Person person) {
         Session session = sessionFactory.getCurrentSession();
+        person.setCreatedAt(new Date());
         session.persist(person);
     }
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,13 +41,13 @@ public class PeopleJdbcTemplateDAO {
     }
 
     public void save(Person p) {
-        String sql = "insert into person (name, age, mail, address) VALUES (?,?,?,?)";
-        jdbcTemplate.update(sql, p.getName(), p.getAge(), p.getMail(), p.getAddress());
+        String sql = "insert into person (name, age, mail, address, date_of_birth, created_at) VALUES (?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, p.getName(), p.getAge(), p.getMail(), p.getAddress(), p.getDateOfBirth(), new Date());
     }
 
     public void update(Person p, int id) {
-        String sql = "update person set name = ?, age = ?, mail = ?, address = ? where id = ?";
-        jdbcTemplate.update(sql, p.getName(), p.getAge(), p.getMail(), p.getAddress(), id);
+        String sql = "update person set name = ?, age = ?, mail = ?, address = ?, date_of_birth=? where id = ?";
+        jdbcTemplate.update(sql, p.getName(), p.getAge(), p.getMail(), p.getAddress(), p.getDateOfBirth(), id);
     }
 
     public void delete(int id) {

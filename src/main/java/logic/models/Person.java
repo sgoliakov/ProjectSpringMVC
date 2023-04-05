@@ -3,6 +3,9 @@ package logic.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -33,4 +36,21 @@ public class Person {
             message = "Your address should be in this format: Country, City, index(6 digits)")
     @Column(name = "address")
     private String address;
+
+    @Column(name = "date_of_birth")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date dateOfBirth;
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    public Person(int id, String name, int age, String mail, String address) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.mail = mail;
+        this.address = address;
+    }
 }
