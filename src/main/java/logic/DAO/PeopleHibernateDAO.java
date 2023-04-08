@@ -35,7 +35,6 @@ public class PeopleHibernateDAO {
     @Transactional
     public void save(Person person) {
         Session session = sessionFactory.getCurrentSession();
-        person.setCreatedAt(new Date());
         session.persist(person);
     }
 
