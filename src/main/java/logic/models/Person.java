@@ -36,6 +36,9 @@ public class Person {
             message = "Your address should be in this format: Country, City, index(6 digits)")
     @Column(name = "address")
     private String address;
+    @Column(name = "position")
+    @Enumerated(EnumType.STRING)
+    private Position position;
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
